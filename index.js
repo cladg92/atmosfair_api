@@ -1,8 +1,18 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const Models = require("./models.js");
 
 const app = express();
 
-let airports = [
+// Define mongoose model
+const Airports = Models.Airport;
+// Connect mongoose to database
+mongoose.connect("mongodb://localhost:27017/airportsDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+/*let airports = [
   {
     iata_code: "HIR",
     name: "Honiara International Airport",
@@ -24,23 +34,33 @@ let airports = [
     longitude: -22.6056,
     municipality: "Reykjavík",
   },
-];
+];*/
 
 app.get("/", (req, res) => {
   res.send("Welcome!");
 });
 
 app.get("/airports", (req, res) => {
-  res.json(airports);
+  Airports.find()
+    .then((airports) => {
+      res.status(200).json(airports);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
-app.get("/airports/:iata_code", (req, res) => {
-  res.json(airports.find((a) => a.iata_code == req.params.iata_code));
-});
-
-app.get("/documentation", (req, res) => {
-  res.sendFile("public/documentation.html", { root: __dirname });
-});
+/*app.get("/airports/:iata_code", (req, res) => {
+  Airports.findOne({ iata_code: req.params.iata_code })
+    .then((a) => {
+      res.json(a);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});*/
 
 // listen for requests
 app.listen(8081, () => {
