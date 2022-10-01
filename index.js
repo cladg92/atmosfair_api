@@ -1,6 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Models = require("./models.js");
+const cors = require("cors");
+
+// Allow all origins
+app.use(cors());
 
 const app = express();
 
@@ -51,7 +55,7 @@ app.get("/airports", (req, res) => {
     });
 });
 
-/*app.get("/airports/:iata_code", (req, res) => {
+app.get("/airports/:iata_code", (req, res) => {
   Airports.findOne({ iata_code: req.params.iata_code })
     .then((a) => {
       res.json(a);
@@ -60,9 +64,10 @@ app.get("/airports", (req, res) => {
       console.error(err);
       res.status(500).send("Error: " + err);
     });
-});*/
+});
 
 // listen for requests
-app.listen(8081, () => {
-  console.log("Your app is listening on port 8081.");
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
