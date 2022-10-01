@@ -11,6 +11,7 @@ app.use(cors());
 // Define mongoose model
 const Airports = Models.Airport;
 // Connect mongoose to database
+// 'mongodb://localhost:27017/airportsDB'
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
