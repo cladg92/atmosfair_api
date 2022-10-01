@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 const cors = require("cors");
 
+const app = express();
+
 // Allow all origins
 app.use(cors());
-
-const app = express();
 
 // Define mongoose model
 const Airports = Models.Airport;
