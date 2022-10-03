@@ -3,7 +3,7 @@
 ## Description
 
 RESTful API that allows client to access airport data stored in a MongoDB database. 
-Check it out live [here](https://atmosfair.herokuapp.com/airports)
+Check it out live [here](https://atmosfair.herokuapp.com/airports).
 
 
 ### Features
