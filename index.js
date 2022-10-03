@@ -17,6 +17,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
+// Example data
 /*let airports = [
   {
     iata_code: "HIR",
@@ -41,10 +42,14 @@ mongoose.connect(process.env.CONNECTION_URI, {
   },
 ];*/
 
+// Routes
+
+// Welcome page
 app.get("/", (req, res) => {
   res.send("Welcome!");
 });
 
+// Get all of airports
 app.get("/airports", (req, res) => {
   Airports.find()
     .then((airports) => {
@@ -56,6 +61,7 @@ app.get("/airports", (req, res) => {
     });
 });
 
+// Get on airport by code
 app.get("/airports/:iata_code", (req, res) => {
   Airports.findOne({ iata_code: req.params.iata_code })
     .then((a) => {
